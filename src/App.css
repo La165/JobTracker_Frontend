@@ -1,0 +1,125 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f4f6f9;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* FORM */
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background: rgb(38, 60, 225);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.btn-edit {
+  background: rgb(0, 106, 255);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.btn-secondary {
+  background: rgb(39, 12, 211);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* FILTER */
+.filter-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* JOB CARD */
+.job-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-top: 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+/* ACTION BUTTONS */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* BADGES */
+.badge {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 110px;
+  height: 28px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+}
+
+.APPLIED { background: rgb(55, 69, 223); }
+.INTERVIEW { background: orange; }
+.OFFER { background: green; }
+.REJECTED { background: red; }
+
+/* LOGOUT */
+.logout-btn {
+  position: absolute;
+  right: 40px;
+  top: 20px;
+  background: red;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+}
