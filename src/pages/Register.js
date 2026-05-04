@@ -22,7 +22,9 @@ function Register({ switchToLogin }) {
       switchToLogin();
 
     } catch (err) {
-      console.error("ERROR:", err.response?.data);
+        console.log("FULL ERROR:", err); // 🔥 add this
+  console.error("ERROR DATA:", err.response?.data);
+  console.error("STATUS:", err.response?.status);
       alert(err.response?.data || "Registration failed");
     }
   };
