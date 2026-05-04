@@ -1,43 +1,72 @@
 import { useState } from "react";
 import API from "../services/api";
 import "./Auth.css";
+
 function Register({ switchToLogin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault(); // 🔥 VERY IMPORTANT
+
     try {
-      await API.post("/auth/register", { name, email, password });
+      const res = await API.post("/auth/register", {
+        name,
+        email,
+        password
+      });
+
+      console.log("SUCCESS:", res.data);
       alert("Registered successfully!");
       switchToLogin();
-    } catch {
-      alert("Registration failed");
+
+    } catch (err) {
+      console.error("ERROR:", err.response?.data);
+      alert(err.response?.data || "Registration failed");
     }
   };
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
+      <form className="auth-card" onSubmit={handleRegister}>  {/* ✅ FORM ADDED */}
+
         <h2>Register</h2>
 
-        <input className="input" placeholder="Name"
-          onChange={e => setName(e.target.value)} />
+        <input
+          className="input"
+          name="name"
+          placeholder="Name"
+          onChange={e => setName(e.target.value)}
+          required
+        />
 
-        <input className="input" placeholder="Email"
-          onChange={e => setEmail(e.target.value)} />
+        <input
+          className="input"
+          name="email"
+          placeholder="Email"
+          onChange={e => setEmail(e.target.value)}
+          required
+        />
 
-        <input className="input" type="password" placeholder="Password"
-          onChange={e => setPassword(e.target.value)} />
+        <input
+          className="input"
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={e => setPassword(e.target.value)}
+          required
+        />
 
-        <button className="btn-primary" onClick={handleRegister}>
+        <button type="submit" className="btn-primary"> {/* ✅ IMPORTANT */}
           Register
         </button>
 
         <p className="switch-text" onClick={switchToLogin}>
           Already have an account? Login
         </p>
-      </div>
+
+      </form>
     </div>
   );
 }
