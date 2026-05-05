@@ -10,7 +10,13 @@ function JobList({ jobs, setJobs, onEdit }) {
   const [editData, setEditData] = useState({
     companyName: "",
     role: "",
+    jobLink: "",
+    location: "",
     status: "APPLIED",
+    appliedDate: "",
+    examDate: "",
+    notes: "",
+    resumeVersion: ""
   });
 
   const deleteJob = async (id) => {
@@ -20,10 +26,17 @@ function JobList({ jobs, setJobs, onEdit }) {
 
   const startEdit = (job) => {
     setEditJobId(job.id);
+
     setEditData({
-      companyName: job.companyName,
-      role: job.role,
-      status: job.status,
+      companyName: job.companyName || "",
+      role: job.role || "",
+      jobLink: job.jobLink || "",
+      location: job.location || "",
+      status: job.status || "APPLIED",
+      appliedDate: job.appliedDate || "",
+      examDate: job.examDate || "",
+      notes: job.notes || "",
+      resumeVersion: job.resumeVersion || ""
     });
 
     onEdit(job);
@@ -60,16 +73,21 @@ function JobList({ jobs, setJobs, onEdit }) {
 
   const filteredJobs = jobs.filter((job) => {
     return (
-      job.companyName.toLowerCase().includes(search.toLowerCase()) &&
+      (job.companyName || "")
+        .toLowerCase()
+        .includes((search || "").toLowerCase()) &&
       (statusFilter === "ALL" || job.status === statusFilter)
     );
   });
+
+  const isShortlisted = editData.status === "SHORTLISTED";
 
   return (
     <div className="joblist-container">
 
       <h2 className="title">Job Tracker</h2>
 
+      {/* FILTER BAR */}
       <div className="filter-bar">
         <input
           className="input"
@@ -85,6 +103,7 @@ function JobList({ jobs, setJobs, onEdit }) {
         >
           <option value="ALL">All</option>
           <option value="APPLIED">Applied</option>
+          <option value="SHORTLISTED">Shortlisted</option>
           <option value="INTERVIEW">Interview</option>
           <option value="OFFER">Offer</option>
           <option value="REJECTED">Rejected</option>
@@ -95,53 +114,111 @@ function JobList({ jobs, setJobs, onEdit }) {
         </button>
       </div>
 
+      {/* JOB LIST */}
       <div className="job-grid">
         {filteredJobs.map((job) => (
-          <div key={job.id} className="job-card">
+          <div key={job.id} className={`job-card ${job.status}`}>
 
             {editJobId === job.id ? (
               <div className="edit-box">
 
-  <div className="edit-row">
-    <input
-      className="input"
-      name="companyName"
-      value={editData.companyName}
-      onChange={handleEditChange}
-      placeholder="Company"
-    />
+                <div className="edit-row">
 
-    <input
-      className="input"
-      name="role"
-      value={editData.role}
-      onChange={handleEditChange}
-      placeholder="Role"
-    />
+                  <input
+                    className="input"
+                    name="companyName"
+                    value={editData.companyName}
+                    onChange={handleEditChange}
+                    placeholder="Company"
+                  />
 
-    <select
-      className="input"
-      name="status"
-      value={editData.status}
-      onChange={handleEditChange}
-    >
-      <option value="APPLIED">Applied</option>
-      <option value="INTERVIEW">Interview</option>
-      <option value="OFFER">Offer</option>
-      <option value="REJECTED">Rejected</option>
-    </select>
-  </div>
+                  <input
+                    className="input"
+                    name="role"
+                    value={editData.role}
+                    onChange={handleEditChange}
+                    placeholder="Role"
+                  />
 
-  <div className="edit-actions">
-    <button
-      className="btn-primary"
-      onClick={() => saveEdit(job.id)}
-    >
-      Save
-    </button>
-  </div>
+                  <input
+                    className="input"
+                    name="jobLink"
+                    value={editData.jobLink}
+                    onChange={handleEditChange}
+                    placeholder="Job Link"
+                  />
 
-</div>
+                  <input
+                    className="input"
+                    name="location"
+                    value={editData.location}
+                    onChange={handleEditChange}
+                    placeholder="Location"
+                  />
+
+                  <select
+                    className="input"
+                    name="status"
+                    value={editData.status}
+                    onChange={handleEditChange}
+                  >
+                    <option value="APPLIED">Applied</option>
+                    <option value="SHORTLISTED">Shortlisted</option>
+                    <option value="INTERVIEW">Interview</option>
+                    <option value="OFFER">Offer</option>
+                    <option value="REJECTED">Rejected</option>
+                  </select>
+
+                  <input
+                    className="input"
+                    type="date"
+                    name="appliedDate"
+                    value={editData.appliedDate}
+                    onChange={handleEditChange}
+                  />
+
+                  {/* SHORTLISTED FIELDS */}
+                  {isShortlisted && (
+                    <>
+                      <input
+                        className="input"
+                        type="date"
+                        name="examDate"
+                        value={editData.examDate}
+                        onChange={handleEditChange}
+                      />
+
+                      <textarea
+                        className="input"
+                        name="notes"
+                        value={editData.notes}
+                        onChange={handleEditChange}
+                        placeholder="Notes"
+                      />
+                    </>
+                  )}
+
+                  <input
+                    className="input"
+                    name="resumeVersion"
+                    value={editData.resumeVersion}
+                    onChange={handleEditChange}
+                    placeholder="Resume Version"
+                    readOnly
+                  />
+
+                </div>
+
+                <div className="edit-actions">
+                  <button
+                    className="btn-primary"
+                    onClick={() => saveEdit(job.id)}
+                  >
+                    Save
+                  </button>
+                </div>
+
+              </div>
             ) : (
               <>
                 <div className="job-info">
