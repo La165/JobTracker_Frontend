@@ -117,7 +117,7 @@ function JobList({ jobs, setJobs, onEdit }) {
       {/* JOB LIST */}
       <div className="job-grid">
         {filteredJobs.map((job) => (
-          <div key={job.id} className={`job-card ${job.status}`}>
+          <div key={job.id} className="job-card">
 
             {editJobId === job.id ? (
               <div className="edit-box">

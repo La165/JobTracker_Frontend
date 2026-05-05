@@ -44,8 +44,8 @@
 /* Form row grid (IMPORTANT for many fields) */
 .form-row {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 /* Button area */
@@ -71,7 +71,8 @@
 
 /* TEXTAREA fix */
 textarea.input {
-  min-height: 80px;
+  min-height: 90px;
+  grid-column: 1 / -1;
   resize: vertical;
 }
 
