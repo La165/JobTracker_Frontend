@@ -14,7 +14,7 @@ function JobList({ jobs, setJobs, onEdit }) {
     location: "",
     status: "APPLIED",
     appliedDate: "",
-    examDate: "",
+    examDate: null,
     notes: "",
     resumeVersion: ""
   });
@@ -34,7 +34,7 @@ function JobList({ jobs, setJobs, onEdit }) {
       location: job.location || "",
       status: job.status || "APPLIED",
       appliedDate: job.appliedDate || "",
-      examDate: job.examDate || "",
+      examDate: job.examDate || null,
       notes: job.notes || "",
       resumeVersion: job.resumeVersion || ""
     });
