@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import API from "../services/api";
 import "./AddJob.css";
 
-function AddJob({ selectedJob, setJobs, clearSelection }) {
-  const initialState = {
+const initialState = {
     companyName: "",
     role: "",
     jobLink: "",
@@ -13,6 +12,8 @@ function AddJob({ selectedJob, setJobs, clearSelection }) {
     resumeVersion: "software developer",
     notes: ""
   };
+function AddJob({ selectedJob, setJobs, clearSelection }) {
+  
 
   const [job, setJob] = useState(initialState);
 
